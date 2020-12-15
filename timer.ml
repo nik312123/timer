@@ -5,6 +5,8 @@
 (**
     [time_exp_res] takes in a lazy expression, times how long it takes for the expression to run, and returns the
     evaluated expression and the time it took to run in seconds
+    @param exp_lazy The lazy expression to time
+    @return A tuple containing the result of the expression and the time it took the expression to run in seconds
 *)
 let time_exp_res (exp_lazy: 'a lazy_t): 'a * float =
     let t_i = Sys.time () in
@@ -15,12 +17,16 @@ let time_exp_res (exp_lazy: 'a lazy_t): 'a * float =
 (**
     [time_exp] takes in a lazy expression, times how long it takes for the expression to run, and returns the time it
     took to run in seconds
+    @param exp_lazy The lazy expression to time
+    @return The time it took the expression to run in seconds
 *)
 let time_exp (exp_lazy: 'a lazy_t): float = time_exp_res exp_lazy |> snd
 
 (**
     [time_exp_n] takes in a lazy expression, times how long it takes for the expression to run [n] times, and returns
     the time it took to run in seconds
+    @param exp_lazy The lazy expression to time
+    @return The time it took the expression to run [n] times in seconds
 *)
 let time_exp_n (n: int) (exp_lazy: 'a lazy_t): float =
     let rec time_exp_n_aux (i: int) (acc: float): float =
@@ -32,6 +38,10 @@ let time_exp_n (n: int) (exp_lazy: 'a lazy_t): float =
     [func_timer_res] takes in a lazy function and its input, times how long it takes for the function to run with the
     given input, and returns the function result and the time it took to run in seconds; it may be useful to only
     provide the first argument so that you can time the same function with various different inputs
+    @param fun_lazy The lazy function to time with [input]
+    @param input    The input to the function to time
+    @return A tuple containing the output of the function and the time it took the function to run in seconds with the
+    given input
 *)
 let func_timer_res (fun_lazy: ('a -> 'b) lazy_t) (input: 'a): 'b * float =
     let t_i = Sys.time () in
@@ -43,6 +53,9 @@ let func_timer_res (fun_lazy: ('a -> 'b) lazy_t) (input: 'a): 'b * float =
     [func_timer] takes in a lazy function and its input, times how long it takes for the function to run with the given
     input, and returns the time it took to run in seconds; it may be useful to only provide the first argument so that
     you can time the same function with various different inputs
+    @param fun_lazy The lazy function to time with [input]
+    @param input    The input to the function to time
+    @return The time it took the function to run in seconds with the given input
 *)
 let func_timer (fun_lazy: ('a -> 'b) lazy_t) (input: 'a): float = func_timer_res fun_lazy input |> snd
 
@@ -50,6 +63,9 @@ let func_timer (fun_lazy: ('a -> 'b) lazy_t) (input: 'a): float = func_timer_res
     [func_timer] takes in a lazy function and its input, times how long it takes for the function to run with the given
     input [n] times, and returns the time it took to run in seconds; it may be useful to only provide the first argument
     so that you can time the same function with various different inputs
+    @param fun_lazy The lazy function to time with [input]
+    @param input    The input to the function to time
+    @return The time it took the function to run [n] times in seconds with the given input
 *)
 let func_timer_n (n: int) (fun_lazy: ('a -> 'b) lazy_t) (input: 'a): float =
     let rec func_timer_n_aux (i: int) (acc: float): float =
