@@ -1,5 +1,5 @@
 (**
-    [Timer] is a function timing framework that is used to time the execution time of expressions or functions
+    [Timer] is a function timing framework that is used to time the execution time of expressions and functions
 *)
 
 (**
@@ -8,7 +8,7 @@
     @param exp_thunk The expression to time upon execution of the thunk
     @return A tuple containing the result of the expression and the time it took the expression to run in seconds
 *)
-let time_exp_res (exp_thunk: unit ->'a): 'a * float =
+let time_exp_res (exp_thunk: unit -> 'a): 'a * float =
     let t_i = Sys.time () in
     let res = exp_thunk () in
     let t_f = Sys.time () in
@@ -36,11 +36,11 @@ let time_exp_n (n: int) (exp_thunk: unit -> 'a): float =
     in time_exp_n_aux n 0.
 
 (**
-    [func_timer_res] takes in an unevaluated function using a thunk and its unevaluated input using a thunk, times how
-    long it takes for the function to run with the given input, and returns the function result and the time it took to
-    run in seconds; it may be useful to only provide the first argument so that you can time the same function with
-    various different inputs
-    @param fun_thunk   The function thunk to time with [input_thunk] upon execution of the thunk
+    [func_timer_res] takes in an unevaluated, one-argument function using a thunk and its unevaluated input using a
+    thunk, times how long it takes for the function to run with the given input, and returns the function result and the
+    time it took to run in seconds; it may be useful to only provide the first argument so that you can time the same
+    function with various different inputs
+    @param fun_thunk   The function thunk to time with the given input upon execution of the thunk
     @param input_thunk The input to the function to time that will be evaluated upon execution of the thunk
     @return A tuple containing the output of the function and the time it took the function to run in seconds with the
     given input
@@ -52,10 +52,11 @@ let func_timer_res (fun_thunk: unit -> ('a -> 'b)) (input_thunk: unit -> 'a): 'b
     (res, t_f -. t_i)
 
 (**
-    [func_timer] takes in an unevaluated function using a thunk and its unevaluated input using a thunk, times how long
-    it takes for the function to run with the given input, and returns the time it took to run in seconds; it may be
-    useful to only provide the first argument so that you can time the same function with various different inputs
-    @param fun_thunk   The function thunk to time with [input_thunk] upon execution of the thunk
+    [func_timer] takes in an unevaluated, one-argument function using a thunk and its unevaluated input using a thunk,
+    times how long it takes for the function to run with the given input, and returns the time it took to run in
+    seconds; it may be useful to only provide the first argument so that you can time the same function with various
+    different inputs
+    @param fun_thunk   The function thunk to time with the given input upon execution of the thunk
     @param input_thunk The input to the function to time that will be evaluated upon execution of the thunk
     @return The time it took the function to run in seconds with the given input
 *)
@@ -63,12 +64,12 @@ let func_timer (fun_thunk: unit -> ('a -> 'b)) (input_thunk: unit -> 'a): float 
     func_timer_res fun_thunk input_thunk |> snd
 
 (**
-    [func_timer] takes in an unevaluated function using a thunk and its unevaluated input using a thunk, times how long
-    it takes for the function to run with the given input [n] times, and returns the time it took to run in seconds; it
-    may be useful to only provide the first argument so that you can time the same function with various different
-    inputs
+    [func_timer] takes in an unevaluated, one-argument function using a thunk and its unevaluated input using a thunk,
+    times how long  it takes for the function to run with the given input [n] times, and returns the time it took to run
+    in seconds; it may be useful to only provide the first argument so that you can time the same function with various
+    different inputs
     @param n           The number of times to test the function with the given input
-    @param fun_thunk   The function thunk to time with [input_thunk] upon execution of the thunk
+    @param fun_thunk   The function thunk to time with the given input upon execution of the thunk
     @param input_thunk The input to the function to time that will be evaluated upon execution of the thunk
     @return The time it took the function to run [n] times in seconds with the given input
 *)

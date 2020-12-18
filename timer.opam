@@ -4,7 +4,7 @@ version: "1.0"
 synopsis: "Timer function timing framework"
 description: """
 timer is a function timing framework that is used
-to time the execution time of expressions or
+to time the execution time of expressions and
 functions
 """
 maintainer: "Nikunj Chawla <nikchawla312@gmail.com>"
