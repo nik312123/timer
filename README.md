@@ -2,7 +2,7 @@
 
 ## Short Description
 
-Used to time the execution time of expressions or functions.
+Used to time the execution time of expressions or functions
 
 ## Documentation
 
